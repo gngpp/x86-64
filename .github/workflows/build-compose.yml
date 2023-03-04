@@ -155,7 +155,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       if: steps.tag.outputs.status == 'success' && !cancelled()
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
           name: ${{ steps.tag.outputs.release_date }} x86-64-Linux-${{ steps.generate.outputs.kernel_version }} 固件
           tag_name: ${{ steps.tag.outputs.release_tag }}
@@ -169,10 +169,4 @@ jobs:
           keep_latest: 20
           delete_tags: true
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Delete Artifacts
-      uses: geekyeggo/delete-artifact@v2
-      with:
-         name: |
-            bin-archive
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
