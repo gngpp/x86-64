@@ -1,14 +1,3 @@
-#!/bin/bash
-#=================================================
-# File name: lean.sh
-# System Required: Linux
-# Version: 1.0
-# Lisence: MIT
-# Author: SuLingGG
-# Blog: https://mlapp.cn
-#=================================================
-# Clone community packages to package/community
-
 # alist
 git clone https://github.com/sbwml/luci-app-alist package/alist
 rm -rf feeds/packages/lang/golang
@@ -66,13 +55,9 @@ git clone --depth=1 https://github.com/lisaac/luci-lib-docker
 git clone --depth=1 https://github.com/esirplayground/luci-app-poweroff
 
 # Add luci-theme
-git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon
-git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config
-rm -rf ../../customfeeds/luci/themes/luci-theme-argon
-rm -rf ../../customfeeds/luci/themes/luci-theme-argon-mod
-rm -rf ./luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
-cp -f $GITHUB_WORKSPACE/data/bg1.jpg luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
-git clone https://github.com/DHDAXCW/theme
+git clone --depth=1 https://github.com/gngpp/luci-app-design-config
+git clone --depth=1 https://github.com/gngpp/luci-theme-design
+git clone --depth=1 https://github.com/gngpp/luci-theme-atmaterial
 
 # Add subconverter
 git clone --depth=1 https://github.com/tindy2013/openwrt-subconverter
@@ -105,9 +90,6 @@ popd
 pushd package/lean/default-settings/files
 sed -i '/http/d' zzz-default-settings
 sed -i '/18.06/d' zzz-default-settings
-export orig_version=$(cat "zzz-default-settings" | grep DISTRIB_REVISION= | awk -F "'" '{print $2}')
-export date_version=$(date -d "$(rdate -n -4 -p ntp.aliyun.com)" +'%Y-%m-%d')
-sed -i "s/${orig_version}/${orig_version} (${date_version})/g" zzz-default-settings
 popd
 
 # Fix libssh
@@ -120,11 +102,4 @@ popd
 sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
 
 # Modify default IP
-sed -i 's/192.168.1.1/192.168.11.1/g' package/base-files/files/bin/config_generate
-
-# Test kernel 6.1
-rm -rf target/linux/x86/base-files/etc/board.d/02_network
-cp -f $GITHUB_WORKSPACE/02_network target/linux/x86/base-files/etc/board.d/02_network
-# sed -i 's/5.15/6.1/g' target/linux/x86/Makefile
-rm -rf package/base-files/files/etc/banner
-wget -P package/base-files/files/etc https://raw.githubusercontent.com/DHDAXCW/lede-rockchip/stable/package/base-files/files/etc/banner
+sed -i 's/192.168.1.1/10.0.0.1/g' package/base-files/files/bin/config_generate
