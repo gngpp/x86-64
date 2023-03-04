@@ -1,5 +1,15 @@
+<div align="center">
+<a href="/LICENSE">
+    <img src="https://img.shields.io/github/license/gngpp/x86-64?style=flat&a=1" alt="">
+  </a>
+  </a><a href="https://github.com/gngpp/x86-64/releases">
+    <img src="https://img.shields.io/github/release/gngpp/x86-64.svg?style=flat">
+  </a><a href="hhttps://github.com/gngpp/x86-64/releases">
+    <img src="https://img.shields.io/github/downloads/gngpp/x86-64/total?style=flat">
+  </a>
+</div>
+<br>
 # x86
-## 👉使用本固件前，请严格遵守国家互联网使用相关法律规定,不要违反国家法律规定！👈
 ### 默认编译  
 - 用户名：root 密码：password  管理IP：10.0.0.1
 - 固件下载地址：https://github.com/gngpp/x86-64
