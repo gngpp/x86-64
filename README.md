@@ -9,7 +9,9 @@
   </a>
 </div>
 <br>
+
 # x86
+
 ### 默认编译  
 - 用户名：root 密码：password  管理IP：10.0.0.1
 - 固件下载地址：https://github.com/gngpp/x86-64
