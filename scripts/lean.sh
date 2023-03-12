@@ -3,6 +3,17 @@ git clone https://github.com/sbwml/luci-app-alist package/alist
 rm -rf feeds/packages/lang/golang
 svn export https://github.com/sbwml/packages_lang_golang/branches/19.x feeds/packages/lang/golang
 
+# Add luci-app-watchcat-plus
+rm -rf feeds/packages/utils/watchcat
+svn co https://github.com/openwrt/packages/trunk/utils/watchcat feeds/packages/utils/watchcat
+git clone https://github.com/gngpp/luci-app-watchcat-plus.git package/luci-app-watchcat-plus
+
+# Add luci-theme
+rm -rf feeds/luci/themes/luci-theme-design
+rm -rf feeds/luci/applications/luci-app-design-config
+git clone --depth=1 https://github.com/gngpp/luci-app-design-config package/luci-app-design-config
+git clone --depth=1 https://github.com/gngpp/luci-theme-design package/luci-theme-design
+
 mkdir package/community
 pushd package/community
 
@@ -50,11 +61,6 @@ git clone --depth=1 https://github.com/lisaac/luci-lib-docker
 
 # Add luci-app-poweroff
 git clone --depth=1 https://github.com/esirplayground/luci-app-poweroff
-
-# Add luci-theme
-git clone --depth=1 https://github.com/gngpp/luci-app-design-config
-git clone --depth=1 https://github.com/gngpp/luci-theme-design
-git clone --depth=1 https://github.com/gngpp/luci-theme-atmaterial
 
 # Add subconverter
 git clone --depth=1 https://github.com/tindy2013/openwrt-subconverter
