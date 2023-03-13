@@ -3,10 +3,15 @@ name: x86-64
 on:
   repository_dispatch:
   workflow_dispatch:
-  # schedule:
-    # - cron: 0 17 * * *
-  # watch:
-  #   types: started
+    inputs:
+      machine:
+        description: 'Compile machine'
+        required: true
+        default: "10900T"
+        type: choice
+        options:
+        - "10900T"
+        - "10850K"
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
@@ -19,7 +24,7 @@ env:
 
 jobs:
   Build:
-    runs-on: self-hosted
+    runs-on: [self-hosted, Linux, X64, "${{ inputs.machine }}"]
     outputs:
       OPENWRTROOT: ${{ steps.update.outputs.OPENWRTROOT }}
       PLATFORM: ${{ steps.compile.outputs.PLATFORM }}
