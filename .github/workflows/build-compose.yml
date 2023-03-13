@@ -70,10 +70,10 @@ jobs:
       id: package
       run: |
         cd $OPENWRTROOT
-        cat .config
-        make download -j50
+        make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
+        cat .config
   
     - name: Compile Packages
       id: compile
