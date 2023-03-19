@@ -1,3 +1,10 @@
+# 8821cu
+rm -rf package/kernel/mac80211
+rm -rf package/network/services/hostapd
+svn co https://github.com/DHDAXCW/lede-rockchip/trunk/package/kernel/mac80211 package/kernel/mac80211
+svn co https://github.com/DHDAXCW/lede-rockchip/trunk/package/network/services/hostapd package/network/services/hostapd
+svn co https://github.com/DHDAXCW/lede-rockchip/trunk/package/kernel/rtl8821cu package/kernel/rtl8821cu
+
 # alist
 git clone https://github.com/sbwml/luci-app-alist package/alist
 rm -rf feeds/packages/lang/golang
@@ -106,3 +113,5 @@ sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
 
 # Modify default IP
 sed -i 's/192.168.1.1/10.0.0.1/g' package/base-files/files/bin/config_generate
+
+sed -i 's/5.4/5.15/g' ./target/linux/x86/Makefile
