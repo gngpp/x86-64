@@ -1,10 +1,3 @@
-# 8821cu
-#rm -rf package/kernel/mac80211
-#rm -rf package/network/services/hostapd
-#svn co https://github.com/DHDAXCW/lede-rockchip/trunk/package/kernel/mac80211 package/kernel/mac80211
-#svn co https://github.com/DHDAXCW/lede-rockchip/trunk/package/network/services/hostapd package/network/services/hostapd
-svn co https://github.com/DHDAXCW/lede-rockchip/trunk/package/kernel/rtl8821cu package/kernel/rtl8821cu
-
 # alist
 git clone https://github.com/sbwml/luci-app-alist package/alist
 rm -rf feeds/packages/lang/golang
