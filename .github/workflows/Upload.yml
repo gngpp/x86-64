@@ -1,1 +1,42 @@
 
+name: x86-64
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      machine:
+        description: 'Compile machine'
+        required: true
+        default: "10900T"
+        type: choice
+        options:
+        - "10900T"
+        - "10850K"
+
+env:
+  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_BRANCH: master
+  CONFIG_FILE: configs/lean/lean_docker.config
+  DIY_SH: scripts/lean.sh
+  KMODS_IN_FIRMWARE: true
+  UPLOAD_RELEASE: true
+  TZ: Asia/Shanghai
+
+jobs:
+  Build:
+    runs-on: [self-hosted, Linux, X64, "${{ inputs.machine }}"]
+    
+    steps:
+   
+    - name: Upload firmware to release
+      uses: softprops/action-gh-release@v1
+      if: steps.tag.outputs.status == 'success' && !cancelled()
+      env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      with:
+          name: x86-64
+          tag_name: ${{ steps.tag.outputs.release_tag }}
+          files: /home/gngpp/x86/_work/x86-64/x86-64/openwrt/bin/targets/x86/64/*
+
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
