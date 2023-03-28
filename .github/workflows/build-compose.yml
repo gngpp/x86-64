@@ -15,7 +15,6 @@ on:
 
 
 env:
-  REPO_BRANCzH: stable
   CONFIG_FILE: configs/lean/lean_docker.config
   DIY_SH: scripts/lean.sh
   KMODS_IN_FIRMWARE: true
