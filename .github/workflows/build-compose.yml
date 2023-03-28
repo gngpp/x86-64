@@ -72,8 +72,7 @@ jobs:
     - name: Clone Source Code
       run: |
         df -hT $PWD
-        echo "using repository: $USE_REPO"
-        git clone $USE_REPO openwrt
+        git clone https://github.com/coolsnowwolf/lede openwrt
 
     - name: Reset Version
       id: reset
