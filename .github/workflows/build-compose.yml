@@ -289,17 +289,19 @@ jobs:
         sed -i "s/http:\/\/192.168.123.100:2345\/snapshots/https:\/\/openwrt.cc\/snapshots\/$(date +"%Y-%m-%d")\/lean/g" files/etc/opkg/distfeeds.conf.mirror
         make package/install -j$(nproc) || make package/install -j1 V=s
         make target/install -j$(nproc) || make target/install -j1 V=s
-        pushd bin/targets/rockchip/armv8
-        rm -rf openwrt-rockchip-armv8.manifest
-        rm -rf openwrt-rockchip-armv8-rootfs.tar.gz
-        rm -rf config.buildinfo
-        rm -rf packages-server.zip
-        mv openwrt-rockchip-armv8-friendlyarm_nanopi-r4se-ext4-sysupgrade.img.gz docker-friendlyarm_nanopi-r4se-ext4-sysupgrade.img.gz
-        mv openwrt-rockchip-armv8-friendlyarm_nanopi-r4se-squashfs-sysupgrade.img.gz docker-friendlyarm_nanopi-r4se-squashfs-sysupgrade.img.gz
+        pushd bin/targets/x86/64
+        kernelv=`cat openwrt-x86-64-generic.manifest | grep 'kernel - ' |  awk -F '[- ]' '{print $4}'`
+        echo "kernel_version=$kernelv" >> $GITHUB_OUTPUT
+        rm -rf openwrt-x86-64-generic-kernel.bin
+        rm -rf openwrt-x86-64-generic-rootfs.tar.gz
+        rm -rf openwrt-x86-64-generic-squashfs-rootfs.img.gz
+        rm -rf openwrt-x86-64-generic-squashfs-combined-efi.vmdk
+        rm -rf openwrt-x86-64-generic.manifest
+        mv openwrt-x86-64-generic-squashfs-combined-efi.img.gz docker-x86-64-squashfs-efi.img.gz
         popd
         make checksum
-        mv bin/targets/rockchip/armv8/sha256sums bin/targets/rockchip/armv8/docker-sha256sums
-        echo "GENERATE_STATUS=success"  >> $GITHUB_OUTPUT
+        mv bin/targets/x86/64/sha256sums bin/targets/x86/64/docker-sha256sums
+        echo "GENERATE_STATUS=success" >> $GITHUB_OUTPUT
         
     - name: Generate release tag
       id: tag
